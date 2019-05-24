@@ -40,24 +40,26 @@ Calendar
     color:#000000;
     }
 
-<!--    #food{-->
-<!--    background-color:#B71C1C;-->
+    #food{
+    color:#D32F2F;
+<!--    background-color:#D32F2F;-->
 <!--    border-radius: 5px / 5px;-->
-<!--    color:#ffffff;-->
-<!--    width:90px;-->
-<!--    }-->
 
-<!--    #trans{-->
+    }
+
+    #trans{
+    color:#FF5722;
 <!--    background-color:#FF5722;-->
 <!--    border-radius: 5px / 5px;-->
-<!--    color:#ffffff;-->
-<!--    }-->
 
-<!--    #etc{-->
-<!--    background-color:#F1C40F;-->
+    }
+
+    #etc{
+    color:#3F51B5;
+<!--    background-color:#3F51B5;-->
 <!--    border-radius: 5px / 5px;-->
-<!--    color:#ffffff;-->
-<!--    }-->
+
+    }
 
     th{
     padding-left:70px;
@@ -89,12 +91,40 @@ Calendar
          <div class="row">
         <div class="col-12">
           <div id="menu">
+              <br>
             > 카테고리별 지출 금액 <br>
-              <p>{{ total_meal }}</p>
-              <p>{{ total_trans }}</p>
-              <p>{{ total_etc }}</p>
-            > 최대 지출 일<br>
-            > 월간 기타 통계<br>
+              <br>
+
+              <p style="background-color:#D32F2F; border-radius: 5px / 5px;">
+                  식비 :
+                  <script type="text/javascript">
+                    var a = "{{total_meal}}"
+                    function numberWithCommas(x) {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    }
+                    document.write(numberWithCommas(a))
+                    </script>원
+              </p>
+              <p style="background-color:#FF5722; border-radius: 5px / 5px;">
+                  교통비 :
+                   <script type="text/javascript">
+                    var a = "{{total_trans}}"
+                    function numberWithCommas(x) {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    }
+                    document.write(numberWithCommas(a))
+                    </script>원
+              </p>
+              <p style="background-color:#3F51B5; border-radius: 5px / 5px;">
+                  기타 :
+                  <script type="text/javascript">
+                    var a = "{{total_etc}}"
+                    function numberWithCommas(x) {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    }
+                    document.write(numberWithCommas(a))
+                    </script>원
+              </p>
         </div>
         </div>
       </div>

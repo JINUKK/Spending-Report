@@ -11,18 +11,17 @@ class MayCalendar(calendar.HTMLCalendar):
     user = None
 
     def formatday(self, day, weekday):
-
         user = self.user
         t_expense = self.trans_expense(day)
         m_expense = self.meal_expense(day)
         e_expense = self.etc_expense(day)
         total_expense = self.total_expense(day)
+        print(day)
+        print(total_expense)
 
         if day == 0:
             return '<td class="%s">&nbsp;</td>' % self.cssclass_noday
         else:
-            a = 10000
-            test = "{:,}".format(a)
             return '<td class="%s"><a id="day" href="/detail/%d">%d</a>' \
                    '<div id="food">%s</div>' \
                    '<div id="trans">%s</div>' \
@@ -48,8 +47,9 @@ class MayCalendar(calendar.HTMLCalendar):
             t_expense += event.expense
 
         if not event_list:
-            t_expense = '&nbsp;'
-        return t_expense
+            return '&nbsp;'
+        else:
+            return "{:,}".format(t_expense)
 
     def meal_expense(self, day):
         event_list = Event.objects.filter(f_day=day, category_id=1, author=self.user)
@@ -58,9 +58,9 @@ class MayCalendar(calendar.HTMLCalendar):
             meal_expense += event.expense
 
         if not event_list:
-            meal_expense = '&nbsp;'
-
-        return str(meal_expense)
+            return '&nbsp;'
+        else:
+            return "{:,}".format(meal_expense)
 
     def trans_expense(self, day):
         event_list = Event.objects.filter(f_day=day, category_id=2, author=self.user)
@@ -69,10 +69,9 @@ class MayCalendar(calendar.HTMLCalendar):
             trans_expense += event.expense
 
         if not event_list:
-            print(f'----------------------------{event_list}]')
-            trans_expense = '&nbsp;'
-
-        return str(trans_expense)
+            return '&nbsp;'
+        else:
+            return "{:,}".format(trans_expense)
 
     def etc_expense(self, day):
         event_list = Event.objects.filter(f_day=day, category_id=3, author=self.user)
@@ -81,9 +80,12 @@ class MayCalendar(calendar.HTMLCalendar):
             etc_expense += event.expense
 
         if not event_list:
-            etc_expense = '&nbsp;'
+            return '&nbsp;'
 
-        return str(etc_expense)
+        else:
+            return "{:,}".format(etc_expense)
+
+
 
 def mayCalendar(request):
     mayCal = MayCalendar(calendar.SUNDAY)
