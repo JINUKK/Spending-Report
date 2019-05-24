@@ -61,6 +61,7 @@ def mayCalendar(request):
     mayCal = MayCalendar(calendar.SUNDAY)
     mayCal.user = request.user
     cal = mayCal.formatmonth(2019,5)
+
     return render(request, 'report/calendar.html', {'object_list': mark_safe(cal)})
 
 @login_required
